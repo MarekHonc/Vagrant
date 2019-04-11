@@ -1,0 +1,40 @@
+---
+- hosts: sql
+  sudo: true
+  tasks:
+    - name: Install maria
+      yum:
+        name: mariadb-server, mariadb
+        state: latest
+   # - name: Install MySQL 5.7 repo
+   #   yum: 
+   #       name: http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+   #       state: present
+   # - name: Install MySQL 5.7
+   #   yum: pkg={{ item }}
+   #   with_items:
+   #     - mysql-community-server
+   #     - mysql-community-client
+   #     - MySQL-python
+    - name: Start the mariadb service
+      service: 
+        name: mariadb
+        state: started
+        enabled: true
+   # - name: Service IKUZO startovo
+   #   service:
+   #     name: mariadb
+   #     state: started
+   #     enabled: true
+   # - name: create demo database
+   #   mysql_db: name=anupam state=present login_user=powerdns login_password=powerdns
+   # - name: create dns user
+   #   mysql_user:
+   #     name: root
+   #     password: root
+   #     priv: '*.*:ALL, GRANT'
+   #     state: present
+    - name: Restart the service
+      service:
+        name: mariadb
+        state: restarted
