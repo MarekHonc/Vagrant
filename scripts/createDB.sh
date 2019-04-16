@@ -1,6 +1,11 @@
 echo "Creating database"
 
-mysql -u root mysql -e "CREATE DATABASE powerdns;
+mysql -u root mysql -e "
+CREATE DATABASE dhcp;
+GRANT ALL ON dhcp.* TO 'dhcp'@'localhost' IDENTIFIED BY 'dhcp';
+GRANT ALL ON dhcp.* TO 'dhcp'@'%' IDENTIFIED BY 'dhcp';
+
+CREATE DATABASE powerdns;
 GRANT ALL ON powerdns.* TO 'powerdns'@'localhost' IDENTIFIED BY 'heslo';
 GRANT ALL ON powerdns.* TO 'powerdns'@'%' IDENTIFIED BY 'heslo';
 FLUSH PRIVILEGES;

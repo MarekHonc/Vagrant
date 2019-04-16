@@ -1,0 +1,22 @@
+---
+  - hosts: dhcp
+    sudo: true
+    tasks:
+        - name: Install kea
+          yum:
+              name: kea, mariadb, mariadb-server
+              state: present
+        - name: Why ?
+          service:
+              name: mariadb
+              state: started
+              enabled: true
+        - name: apply kea config
+          copy:
+              src: configs/kea.conf
+              dest: /etc/kea/kea.conf
+        - name: Start
+          service:
+              name: kea-dhcp4
+              state: started
+              enabled: true

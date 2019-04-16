@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-
   config.vm.define "sql" do |sql|
     sql.vm.box = "centos/7"
     sql.vm.hostname = "sql"
@@ -22,10 +21,19 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "dhcp", primary: true do |dhcp|
+    dhcp.vm.box = "centos/7"
+    dhcp.vm.hostname = "dhcp"
+    dhcp.vm.network "private_network", ip: "192.168.200.4"
+    dhcp.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "dhcp.yml"
+    end
+  end
+
   config.vm.define "client" do |client|
     client.vm.box = "centos/7"
     client.vm.hostname = "client"
-    client.vm.network "private_network", ip: "192.168.200.121"
+    client.vm.network "private_network", type:"dhcp"
     client.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "client.yml"
     end
