@@ -5,10 +5,25 @@ Dnsko má dva záznamy
   - nenavidimsvujzivot.net
 
 ## Lukáš: SQLko
-## Marek: Dnsko
+## Marek: Dnsko a složení všeho dokupy
 ## Vojtěch: Dhcp
 ## Filip: Dokumentace a řízení, ne úplně dobře
 
+## Přidání clienta
+```
+  config.vm.define "client" do |client|
+    client.vm.box = "centos/7"
+    client.vm.hostname = "client"
+    client.vm.network "private_network", ip:"192.168.200.10"
+    client.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "client.yml"
+    end
+  end
+```
+
+Klient musí mít nastavenou statickou ip, kterou mu následně ansible odebere a přiřadí mu adresu od vlasního DHCP serveru.
+Řeším to tímto způsobem, protože jinak Vagrant stroji přiřadí adresu z jeho DHCP poolu, tímto způsobem tento pool
+obejdu a můžu použít svůj DHCP server.
 
 # Virtuální síť za pomocí Vagrantu
 Vytvořte virtuální síť složenou z DHCP- serveru, DNS serveru a databáze. K jejímu vytvoření je nejjednoduší využít nástroj Vagrant, který automatizuje jednotlivé skripty.

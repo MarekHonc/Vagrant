@@ -7,3 +7,7 @@
         path: /etc/resolv.conf
         regexp: '^nameserver'
         line: 'nameserver 192.168.200.3'
+    - name: remove static IP
+      command: ip addr del 192.168.200.10/24 dev eth1
+    - name: add dhcp
+      command: dhclient eth1

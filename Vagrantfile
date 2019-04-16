@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "client" do |client|
     client.vm.box = "centos/7"
     client.vm.hostname = "client"
-    client.vm.network "private_network", type:"dhcp"
+    client.vm.network "private_network", ip:"192.168.200.10"
     client.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "client.yml"
     end
