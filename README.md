@@ -4,6 +4,11 @@ Dnsko má dva záznamy
   - private.vagrantjeblbost.net
   - nenavidimsvujzivot.net
 
+Lukáš: SQLko
+Marek: Dnsko
+Vojtěch: Dhcp
+Filip: Dokumentace a řízení, ne úplně dobře
+
 
 Virtuální síť za pomocí Vagrantu
 Vytvořte virtuální síť složenou z DHCP- serveru, DNS serveru a databáze. K jejímu vytvoření je nejjednoduší využít nástroj Vagrant, který automatizuje jednotlivé skripty.
